@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   Midnight Indigo — Ramzy Albazel Portfolio
+   ============================================ */
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --background: 240 47% 6%;            /* #0a0a1a deep night */
+    --foreground: 220 25% 92%;
+    --card: 232 45% 11%;                  /* #141432 */
+    --card-foreground: 220 25% 92%;
+    --popover: 232 45% 11%;
+    --popover-foreground: 220 25% 92%;
+
+    /* Indigo brand */
+    --primary: 243 75% 58%;               /* #4f46e5 electric indigo */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 250 95% 70%;
+    --accent-cyan: 195 95% 65%;
+
+    --secondary: 232 60% 22%;             /* #1e1e5a */
+    --secondary-foreground: 220 25% 92%;
+
+    --muted: 232 35% 16%;
+    --muted-foreground: 220 15% 65%;
+
+    --accent: 243 75% 58%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 75% 58%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 232 40% 20%;
+    --input: 232 40% 18%;
+    --ring: 243 75% 58%;
+
+    --radius: 0.875rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(243 75% 58%), hsl(265 80% 65%));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(243 75% 30% / 0.45), transparent 60%),
+                     radial-gradient(ellipse at bottom right, hsl(195 95% 50% / 0.18), transparent 55%),
+                     hsl(240 47% 6%);
+    --gradient-card: linear-gradient(135deg, hsl(232 45% 11% / 0.8), hsl(232 60% 18% / 0.6));
+    --gradient-text: linear-gradient(135deg, hsl(220 25% 98%) 0%, hsl(243 75% 75%) 100%);
+
+    /* Shadows & glow */
+    --shadow-glow: 0 10px 40px -10px hsl(243 75% 58% / 0.55);
+    --shadow-card: 0 8px 30px -10px hsl(240 60% 4% / 0.6);
+    --shadow-elegant: 0 20px 60px -20px hsl(243 75% 30% / 0.5);
+
+    /* Motion */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .dark {
+    /* same as :root — site is dark-first */
+    --background: 240 47% 6%;
+    --foreground: 220 25% 92%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02","cv03","cv04","cv11";
+    background: var(--gradient-hero);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  /* RTL support */
+  [dir="rtl"] body { font-family: "Cairo", "Tajawal", "DM Sans", system-ui, sans-serif; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--background)); }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, hsl(var(--primary)), hsl(265 80% 60%));
+    border-radius: 999px;
+  }
+}
+
+@layer components {
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .glass {
+    background: hsl(var(--card) / 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--border) / 0.6);
+  }
+  .glass-strong {
+    background: hsl(var(--card) / 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid hsl(var(--border));
+  }
+  .glow-ring {
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.4), var(--shadow-glow);
+  }
+  .section-pad { @apply py-20 md:py-28; }
+}
+
+@layer utilities {
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.4,0,0.2,1) both; }
+  .animate-glow { animation: glowPulse 3s ease-in-out infinite; }
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes glowPulse {
+  0%,100% { box-shadow: 0 0 30px hsl(var(--primary) / 0.4); }
+  50% { box-shadow: 0 0 60px hsl(var(--primary) / 0.7); }
+}
+@keyframes blob {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(40px,-30px) scale(1.1); }
+  66% { transform: translate(-30px,30px) scale(0.95); }
+}
+.animate-blob { animation: blob 18s ease-in-out infinite; }
