@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ramzy-albazel.vercel.app/sitemap.xml
